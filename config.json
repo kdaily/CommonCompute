@@ -3,7 +3,7 @@
         "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
         "aws_secret_key": "{{env `AWS_SECRET_KEY`}}"
     },
-    
+
     "builders": [
         {
             "type": "amazon-ebs",
@@ -15,9 +15,9 @@
             "ami_name": "ubuntu12.04-SageCommonCompute {{timestamp}}",
             "instance_type": "m3.large"
         }
-        
+
     ],
-    
+
     "provisioners": [
         {
             "type": "shell",
@@ -36,6 +36,13 @@
         {
             "type": "shell",
             "scripts": ["r_provisioner.sh"],
+            "pause_before": "10s",
+            "execute_command": "{{ .Vars }} sudo -E sh '{{ .Path }}'",
+            "only": ["amazon-ebs"]
+        },
+        {
+            "type": "shell",
+            "scripts": ["bcbio_provisioner.sh"],
             "pause_before": "10s",
             "execute_command": "{{ .Vars }} sudo -E sh '{{ .Path }}'",
             "only": ["amazon-ebs"]
