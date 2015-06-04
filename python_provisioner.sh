@@ -25,14 +25,6 @@ pip install synapseclient
 pip install numpy
 pip install pandas
 
-## For cloudbiolinux
-apt-get remove -y python-fabric
-apt-get clean all
-pip install fabric
-git clone git://github.com/chapmanb/cloudbiolinux.git
-cd cloudbiolinux
-fab -f fabfile.py -H localhost install_biolinux:flavor=ngs_pipeline_minimal
-
 # AWS CLI
 pip install awscli
 
